@@ -1,15 +1,13 @@
 #pragma once
 #include <vector>
 #include <string>
-#include <ctime>
 
-class RestorePoint {
+class IStorageAlgorithm {
 public:
-    RestorePoint(const std::vector<std::string>& files, std::time_t timestamp);
-    std::time_t getTimestamp() const;
-    const std::vector<std::string>& getStoredFiles() const;
-
-private:
-    std::time_t timestamp;
-    std::vector<std::string> storedFiles;
+    virtual ~IStorageAlgorithm() = default;
+    virtual std::vector<std::string> store(
+        const std::vector<std::string>& files,
+        const std::string& backupDir,
+        std::time_t timestamp
+    ) const = 0;
 };
